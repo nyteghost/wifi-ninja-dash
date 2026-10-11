@@ -5,7 +5,12 @@ services:
     ports:
       - "8787:8787"
     environment:
-      UNIFI_URL: https://192.168.1.1        # your UniFi console
-      UNIFI_API_KEY: paste-your-unifi-key   # kept here, never in the browser
-      ACCESS_TOKEN: pick-a-long-secret      # type this into the app's API key field
+      # Your UniFi Network container on Unraid (port 8443, self-signed cert is fine):
+      UNIFI_URL: https://192.168.1.10:8443      # <-- your Unraid server's IP
+      # Legacy controller login (create a local admin in UniFi -> Admins & Users):
+      UNIFI_USER: ninja-dash                     # <-- the local admin username
+      UNIFI_PASS: paste-the-password             # <-- its password
+      # If you ever move to a UniFi console with API keys, use this instead:
+      # UNIFI_API_KEY: paste-your-unifi-key
+      ACCESS_TOKEN: pick-a-long-secret           # type this into the app's API key field
       ALLOWED_ORIGINS: https://nyteghost.github.io
