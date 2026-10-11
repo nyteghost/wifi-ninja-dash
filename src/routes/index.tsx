@@ -35,7 +35,22 @@ function Index() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    setSettings(loadSettings());
+    // Scan-to-setup: ?endpoint=...&key=...&site=...&ssid=...
+    const q = new URLSearchParams(window.location.search);
+    let s = loadSettings();
+    if (q.get("endpoint") && q.get("key")) {
+      s = {
+        ...s,
+        mode: "cloud",
+        endpoint: q.get("endpoint")!,
+        apiKey: q.get("key")!,
+        site: q.get("site") || s.site,
+        ssid: q.get("ssid") || s.ssid,
+      };
+      saveSettings(s);
+      window.history.replaceState(null, "", window.location.pathname);
+    }
+    setSettings(s);
     setResume(getResumeAt());
   }, []);
 
