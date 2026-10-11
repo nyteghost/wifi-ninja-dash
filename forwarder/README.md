@@ -6,7 +6,7 @@ A tiny relay that runs on your home network and passes the dashboard's requests 
 
 Docker (recommended): edit `docker-compose.yml`, then `docker compose up -d`.
 
-Plain Node 18+: `UNIFI_URL=https://192.168.1.1 UNIFI_API_KEY=... ACCESS_TOKEN=... node server.mjs`
+Plain Node 18+: `UNIFI_URL=https://192.168.1.10:8443 UNIFI_USER=... UNIFI_PASS=... ACCESS_TOKEN=... node server.mjs`
 
 Check it: open `http://<machine-ip>:8787/health` — it should say `ok`.
 
@@ -14,8 +14,9 @@ Check it: open `http://<machine-ip>:8787/health` — it should say `ok`.
 
 | Variable | Purpose |
 | --- | --- |
-| `UNIFI_URL` | Console address (required) |
-| `UNIFI_API_KEY` | UniFi API key, kept on the server |
+| `UNIFI_URL` | Controller address (required). Legacy container: `https://<unraid-ip>:8443` |
+| `UNIFI_USER` / `UNIFI_PASS` | Legacy controller login (local admin from UniFi → Admins & Users) |
+| `UNIFI_API_KEY` | UniFi OS console API key (use instead of user/pass on newer consoles) |
 | `ACCESS_TOKEN` | Password the app must send (enter it in the app's API key field) |
 | `ALLOWED_ORIGINS` | Sites allowed to call it, comma-separated |
 | `STATIC_DIR` | Folder of the built dashboard, to serve the app from the forwarder too |
