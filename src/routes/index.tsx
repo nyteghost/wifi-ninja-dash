@@ -106,14 +106,12 @@ function Index() {
           <button
             role="switch" aria-checked={on} disabled={busy || loading}
             onClick={() => apply(!on)}
-            className={`mt-6 flex h-20 w-full items-center rounded-full p-2 transition-colors duration-300 disabled:opacity-60 ${on ? "bg-success" : "bg-muted"}`}
+            className={`mt-6 flex h-20 w-full items-center rounded-full p-2 transition-colors duration-300 disabled:opacity-60 ${on ? "bg-success flex-row-reverse" : "bg-muted"}`}
           >
-            <span className={`h-16 w-16 rounded-full bg-card shadow-md transition-transform duration-300 ${on ? "translate-x-[calc(100cqw-100%)]" : ""}`}
-              style={on ? { transform: "translateX(calc(min(100vw, 28rem) - 2.5rem - 3rem - 4rem - 1rem))" } : undefined} />
+            <span className="h-16 w-16 shrink-0 rounded-full bg-card shadow-md" />
             <span className={`flex-1 text-center text-lg font-semibold ${on ? "text-primary-foreground" : "text-muted-foreground"}`}>
-              {on ? "" : "Turn on"}
+              {on ? "Wi-Fi on" : "Wi-Fi off"}
             </span>
-            {on && <span className="absolute" />}
           </button>
           <p className="mt-2 text-center text-xs text-muted-foreground">{on ? "Tap to turn off" : "Tap to turn on"}</p>
         </section>
