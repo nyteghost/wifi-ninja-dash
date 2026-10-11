@@ -13,4 +13,6 @@ services:
       # If you ever move to a UniFi console with API keys, use this instead:
       # UNIFI_API_KEY: paste-your-unifi-key
       ACCESS_TOKEN: pick-a-long-secret           # type this into the app's API key field
+      # The forwarder also serves the dashboard itself at http://<unraid-ip>:8787
+      # (home network only). Allow both that origin and GitHub Pages:
       ALLOWED_ORIGINS: https://nyteghost.github.io
