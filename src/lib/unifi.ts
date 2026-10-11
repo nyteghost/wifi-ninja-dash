@@ -48,8 +48,17 @@ async function api(s: Settings, path: string, init?: RequestInit) {
     ...init,
     headers: { "X-API-KEY": s.apiKey, Accept: "application/json", "Content-Type": "application/json" },
   });
-  if (!res.ok) throw new Error(`Controller replied ${res.status}: ${await res.text()}`);
-  return (await res.json()).data as any[];
+  const text = await res.text();
+  if (!res.ok) throw new Error(`Controller replied ${res.status}: ${text.slice(0, 200)}`);
+  try {
+    return JSON.parse(text).data as any[];
+  } catch {
+    throw new Error(
+      s.mode === "local"
+        ? 'Got a web page instead of controller data. Open Settings and choose "Proxy URL" instead of "Controller".'
+        : "Got a web page instead of controller data. Check the Proxy URL address.",
+    );
+  }
 }
 
 export async function getStatus(s: Settings): Promise<Status> {
