@@ -1,0 +1,11 @@
+services:
+  ninja-forwarder:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "8787:8787"
+    environment:
+      UNIFI_URL: https://192.168.1.1        # your UniFi console
+      UNIFI_API_KEY: paste-your-unifi-key   # kept here, never in the browser
+      ACCESS_TOKEN: pick-a-long-secret      # type this into the app's API key field
+      ALLOWED_ORIGINS: https://nyteghost.github.io
